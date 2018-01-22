@@ -42,7 +42,7 @@ kubectl apply -f samples/bookinfo/bookinfo.yaml
 the moment, Istio doesn't like the way that Spring Cloud Kubernetes will use the
 same port for livenessProbe/readinessProbe, as it does for the main service.
 
-The full code for the test app is available [here](TODO!), and can be built, and deployed
+The full code for the test app is available [here](https://github.com/IBM/spring-cloud-kubernetes-with-istio), and can be built, and deployed
 with
 
 ```
