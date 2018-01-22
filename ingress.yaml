@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: k8singress
+  labels:
+    app: k8singress 
+spec:
+  rules:
+    - host: mycluster.icp 
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: k8sservice
+              servicePort: 9080 
+
