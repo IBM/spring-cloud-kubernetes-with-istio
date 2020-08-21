@@ -46,11 +46,11 @@ The full code for the test app is available [here](https://github.com/IBM/spring
 with
 
 ```
-mvn package fabric8:build fabric8:resource fabric8:push fabric8:deploy
+mvn package k8s:build k8s:resource k8s:push k8s:deploy
 ```
 
 The maven pom file
-relies upon the [Fabric8 Maven Plugin](https://maven.fabric8.io/) to generate the
+relies upon the [Eclipse JKube](https://www.eclipse.org/jkube/)'s [Kubernetes Maven Plugin](https://www.eclipse.org/jkube/docs/kubernetes-maven-plugin) to generate the
 docker image for the app, push the docker image to the registry, generate the
 kubernetes deployment and service yaml, and apply them to the cluster.
 
@@ -252,12 +252,12 @@ call.
 If you require Istio behavior in these circumstances, you should be sure to invoke the Kubernetes Service
 URL, ( `http://servicename.servicenamespace.svc.cluster.local`) rather than a URL obtained via DiscoveryClient or via Ribbon.
 
-### Fabric8 Maven Plugin issues.
+### Eclipse JKube issues.
 
 Istio requires the ports for the container to be named as `grpc`,`redis`,`mongo`, `http` or `http2`.
 As per the Istio [Pod Spec Requeirements](https://istio.io/docs/setup/kubernetes/sidecar-injection.html#pod-spec-requirements))
-Fabric8 Maven Plugin attempts to name the port based on the port number. For `8080`
-Fabric8 Maven Plugin knows it should assign the name `http`, but for port `9080`
+Eclipse JKube attempts to name the port based on the port number. For `8080`
+Eclipse JKube knows it should assign the name `http`, but for port `9080`
 (another common port used by well known Java app servers for http), it will assign the name `glrpc`.
 
 Having a port name other than one of the Istio recognized portnames, results in Istio not affecting
@@ -267,7 +267,7 @@ port names.
 >NOTE: If the port names do not match between the container and the service, an exception is thrown,
 and the connection is refused. This one caught me out for a while!
 
-I've yet to figure out how to convince Fabric8 Maven Plugin to allow me to define names for ports, so
+I've yet to figure out how to convince Eclipse JKube to allow me to define names for ports, so
 *if you plan to use this plugin with Istio, ensure you use port 80, 443, or 8080* to have the expected results.
 
 ### Istio initial startup networking
