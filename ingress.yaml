@@ -12,5 +12,5 @@ spec:
           - path: /
             backend:
               serviceName: k8sservice
-              servicePort: 9080 
+              servicePort: 8080
 
